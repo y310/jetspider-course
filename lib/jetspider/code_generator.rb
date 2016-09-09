@@ -221,7 +221,7 @@ module JetSpider
 
     def visit_AddNode(n)
       if n.left.value.is_a?(Fixnum) && n.value.value.is_a?(Fixnum)
-        @asm.int8 n.left.value + n.value.value
+        @asm.int32 n.left.value + n.value.value
       else
         visit n.left
         visit n.value
@@ -339,7 +339,7 @@ module JetSpider
       if n.value == 1
         @asm.one
       else
-        @asm.int8(n.value)
+        @asm.int32(n.value)
       end
     end
 
