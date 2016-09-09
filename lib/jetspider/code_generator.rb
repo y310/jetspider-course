@@ -220,9 +220,13 @@ module JetSpider
     end
 
     def visit_AddNode(n)
-      visit n.left
-      visit n.value
-      @asm.add
+      if n.left.value.is_a?(Fixnum) && n.value.value.is_a?(Fixnum)
+        @asm.int8 n.left.value + n.value.value
+      else
+        visit n.left
+        visit n.value
+        @asm.add
+      end
     end
 
     def visit_SubtractNode(n)
