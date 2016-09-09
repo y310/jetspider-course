@@ -174,6 +174,9 @@ module JetSpider
       put_insn 'callprop', get_atom_id(name)
     end
 
+    def return
+      put_insn 'return'
+    end
   end
 
 end
