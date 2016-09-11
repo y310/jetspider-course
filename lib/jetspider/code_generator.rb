@@ -327,7 +327,8 @@ module JetSpider
     #
 
     def visit_NewExprNode(n)
-      raise NotImplementedError, 'NewExprNode'
+      visit n.value
+      @asm.new n.arguments.value.size
     end
 
     def visit_DotAccessorNode(n)
