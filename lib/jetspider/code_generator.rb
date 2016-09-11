@@ -143,8 +143,16 @@ module JetSpider
     end
 
     def visit_VarDeclNode(n)
-      visit n.value
-      @asm.setlocal n.variable.index
+      var = n.variable
+      if var.local?
+        visit n.value
+        @asm.setlocal var.index
+      elsif var.global?
+        @asm.bindgname var.name
+        visit n.value
+        @asm.setgname var.name
+        @asm.pop
+      end
     end
 
     def visit_AssignExprNode(n)
@@ -275,7 +283,14 @@ module JetSpider
     end
 
     def visit_PostfixNode(n)
-      raise "PostfixNode not implemented"
+      var = n.operand.variable
+      if n.value == '++'
+        if var.local?
+          @asm.localinc var.index
+        elsif var.global?
+          @asm.gnameinc var.name
+        end
+      end
     end
 
     def visit_BitwiseNotNode(n) raise "BitwiseNotNode not implemented"; end

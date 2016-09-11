@@ -177,6 +177,14 @@ module JetSpider
     def return
       put_insn 'return'
     end
+
+    def localinc(id)
+      put_insn 'localinc', ObjectFile.uint16(id)
+    end
+
+    def gnameinc(name)
+      put_insn 'gnameinc', get_atom_id(name)
+    end
   end
 
 end
