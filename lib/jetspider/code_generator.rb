@@ -128,7 +128,12 @@ module JetSpider
     end
 
     def visit_OpEqualNode(n)
-      raise NotImplementedError, 'OpEqualNode'
+      var = n.left.variable
+      if var.global?
+        @asm.bindgname var.name
+        visit n.value
+        @asm.setgname var.name
+      end
     end
 
     def visit_VarStatementNode(n)
