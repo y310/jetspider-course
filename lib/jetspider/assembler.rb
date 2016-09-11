@@ -174,10 +174,6 @@ module JetSpider
       put_insn 'callprop', get_atom_id(name)
     end
 
-    def return
-      put_insn 'return'
-    end
-
     def localinc(id)
       put_insn 'localinc', ObjectFile.uint16(id)
     end
