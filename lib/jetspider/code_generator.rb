@@ -328,6 +328,7 @@ module JetSpider
 
     def visit_NewExprNode(n)
       visit n.value
+      @asm.this
       @asm.new n.arguments.value.size
     end
 
