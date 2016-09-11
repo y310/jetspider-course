@@ -3,7 +3,9 @@ while(true) {
   break;
 }
 
-while(true) {
+var a = 0;
+while(a < 2) {
+  a = a + 1;
   p(2);
   continue;
   p(1);
